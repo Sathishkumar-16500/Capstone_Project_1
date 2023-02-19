@@ -28,23 +28,13 @@ class Test_Orange_hrm:
         self.driver.find_element(by=By.NAME, value=locators.Orange_hrm_Locators.password_InputBox).send_keys(data.Orange_hrm_Data.password)
         self.driver.find_element(by=By.XPATH, value=locators.Orange_hrm_Locators.LoginButton).click()
 
-    # Test the title of your web application
-    def test_get_title(self,booting_function):
-        self.driver.get(data.Orange_hrm_Data().url)
-        sleep(5)
-        assert self.driver.title == self.driver.title
-        print("SUCCESS : Web Title Captured Successfully !")
-
     # Test Login
     def test_Login(self,booting_function):
         self.driver.get(data.Orange_hrm_Data().url)
-        # sleep(5)
         self.wait.until(EC.presence_of_element_located((By.NAME,locators.Orange_hrm_Locators().username_inputBox))).send_keys(data.Orange_hrm_Data().username)
         self.driver.find_element(by=By.NAME, value=locators.Orange_hrm_Locators.password_InputBox).send_keys(data.Orange_hrm_Data.password)
         self.driver.find_element(by=By.XPATH, value=locators.Orange_hrm_Locators.LoginButton).click()
-        # assert self.driver.title == 'OrangeHRM'
         print("SUCCESS : Logged in with Username {a} and Password {b}".format(a=data.Orange_hrm_Data.username, b = data.Orange_hrm_Data.password))
-        sleep(5)
 
     def test_invalid_login(self,booting_function):
         self.driver.get(data.Orange_hrm_Data().url)
@@ -99,6 +89,7 @@ class Test_Orange_hrm:
             print("failure: Cannot edit and save user details with firstname {a},middlename {b},lastname {c}, employee_id {d}".format(
                     a=data.Orange_hrm_Data.test_first_name, b=data.Orange_hrm_Data.test_middle_name,
                     c=data.Orange_hrm_Data.test_last_name, d=data.Orange_hrm_Data.test_employee_id))
+                    
     def test_delete_employee(self,booting_function,login):
         self.wait.until(EC.presence_of_element_located((By.XPATH, locators.Orange_hrm_Locators().pim_tab))).click()
         self.wait.until(EC.presence_of_element_located((By.XPATH, locators.Orange_hrm_Locators().delete_user_button))).click()
